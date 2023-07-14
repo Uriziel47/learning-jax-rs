@@ -2,6 +2,7 @@ package model;
 
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -9,7 +10,7 @@ import java.util.UUID;
 @NoArgsConstructor(force = true)
 @AllArgsConstructor(staticName = "of")
 @RequiredArgsConstructor(staticName = "of")
-@Builder()
+@Builder(toBuilder = true)
 public class Child {
 
     private TopLevel top;
@@ -17,6 +18,6 @@ public class Child {
     @NonNull private String name;
     @NonNull private Status status;
     private Child parent;
-    private List<Child> subElements;
+    @Getter private final List<Child> subElements = new ArrayList<>();
 
 }

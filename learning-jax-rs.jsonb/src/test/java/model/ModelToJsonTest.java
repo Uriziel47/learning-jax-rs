@@ -7,6 +7,7 @@ import org.approvaltests.core.Options;
 import org.approvaltests.reporters.intellij.IntelliJUltimateReporter;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import serialize.ChildSerializer;
 
 import javax.json.bind.Jsonb;
 import javax.json.bind.JsonbBuilder;
@@ -38,7 +39,8 @@ public class ModelToJsonTest {
                 UUID.fromString("55113115-6fba-4a31-b075-8124393727c6"),
                 "topElement_with_children",
                 "I am top and have children,",
-                Status.OK,
+                Status.OK);
+        toTest.getChildren().addAll(
                 Arrays.asList(
                         Child.of(
                                 UUID.fromString("40da7c39-6034-428d-9b7c-29c56e88893a"),
@@ -65,7 +67,6 @@ public class ModelToJsonTest {
     }
 
     @Test
-    @Disabled
     public void topLevelToJson_with_children() {
         TopLevel toTest = TopLevel.of(
                 UUID.fromString("55113115-6fba-4a31-b075-8124393727c6"),
@@ -93,7 +94,99 @@ public class ModelToJsonTest {
                         .status(Status.UNUSED)
                         .build()
         );
-        toTest.setChildren(children);
+        toTest.getChildren().addAll(children);
+
+        Jsonb jsonb = provideJsonb();
+        String toTestAsJson = jsonb.toJson(toTest);
+
+        Approvals.verify(toTestAsJson, provideApprovalOptions());
+    }
+
+    @Test
+    public void topLevelToJson_with_children_and_subChildren() {
+        TopLevel toTest = TopLevel.of(
+                UUID.fromString("55113115-6fba-4a31-b075-8124393727c6"),
+                "topElement_with_children",
+                "I am top and have children,",
+                Status.OK
+        );
+        {
+            var child = Child.builder()
+                    .top(toTest)
+                    .id(UUID.fromString("40da7c39-6034-428d-9b7c-29c56e88893a"))
+                    .name("Child 1")
+                    .status(Status.OK)
+                    .build();
+            toTest.getChildren().add(child);
+            {
+                var subChild = Child.builder()
+                        .top(toTest)
+                        .parent(child)
+                        .id(UUID.fromString("40da7c39-6034-428d-9b7c-29c56e88893a"))
+                        .name("SubChild 1.1")
+                        .status(Status.OK)
+                        .build();
+                child.getSubElements().add(subChild);
+            }
+            {
+                var subChild = Child.builder()
+                        .top(toTest)
+                        .parent(child)
+                        .id(UUID.fromString("40da7c39-6034-428d-9b7c-29c56e88893a"))
+                        .name("SubChild 1.2")
+                        .status(Status.OK)
+                        .build();
+                child.getSubElements().add(subChild);
+            }
+        }
+        {
+            var child = Child.builder()
+                    .top(toTest)
+                    .id(UUID.fromString("fe01a888-2584-4605-abbe-78469a8dde8b"))
+                    .name("Child 2")
+                    .status(Status.DELETED)
+                    .build();
+            toTest.getChildren().add(child);
+            {
+                var subChild = Child.builder()
+                        .top(toTest)
+                        .parent(child)
+                        .id(UUID.fromString("40da7c39-6034-428d-9b7c-29c56e88893a"))
+                        .name("SubChild 2.1")
+                        .status(Status.OK)
+                        .build();
+                child.getSubElements().add(subChild);
+            }
+            {
+                var subChild = Child.builder()
+                        .top(toTest)
+                        .parent(child)
+                        .id(UUID.fromString("40da7c39-6034-428d-9b7c-29c56e88893a"))
+                        .name("SubChild 2.2")
+                        .status(Status.OK)
+                        .build();
+                child.getSubElements().add(subChild);
+            }
+            {
+                var subChild = Child.builder()
+                        .top(toTest)
+                        .parent(child)
+                        .id(UUID.fromString("40da7c39-6034-428d-9b7c-29c56e88893a"))
+                        .name("SubChild 2.3")
+                        .status(Status.OK)
+                        .build();
+                child.getSubElements().add(subChild);
+            }
+        }
+        {
+            var child = Child.builder()
+                    .top(toTest)
+                    .id(UUID.fromString("66ff4ca7-73bd-49bc-a6b6-72e42cc0258c"))
+                    .name("Child 3")
+                    .status(Status.UNUSED)
+                    .build();
+            toTest.getChildren().add(child);
+        }
 
         Jsonb jsonb = provideJsonb();
         String toTestAsJson = jsonb.toJson(toTest);
@@ -141,6 +234,9 @@ public class ModelToJsonTest {
                 .withFormatting(true)
                 .withAdapters(
                         new UUIDAdapter()
+                )
+                .withSerializers(
+                        new ChildSerializer()
                 )
                 ;
 

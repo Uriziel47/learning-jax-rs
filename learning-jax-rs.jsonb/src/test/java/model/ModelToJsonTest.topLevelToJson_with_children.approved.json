@@ -5,6 +5,11 @@
             "id": "40da7c39-6034-428d-9b7c-29c56e88893a",
             "name": "Child 1",
             "status": "OK",
+            "top": {
+                "id": "55113115-6fba-4a31-b075-8124393727c6",
+                "name": "topElement_with_children",
+                "status": "OK"
+            },
             "subElement": [
             ]
         },
@@ -12,6 +17,11 @@
             "id": "fe01a888-2584-4605-abbe-78469a8dde8b",
             "name": "Child 2",
             "status": "DELETED",
+            "top": {
+                "id": "55113115-6fba-4a31-b075-8124393727c6",
+                "name": "topElement_with_children",
+                "status": "OK"
+            },
             "subElement": [
             ]
         },
@@ -19,6 +29,11 @@
             "id": "66ff4ca7-73bd-49bc-a6b6-72e42cc0258c",
             "name": "Child 3",
             "status": "UNUSED",
+            "top": {
+                "id": "55113115-6fba-4a31-b075-8124393727c6",
+                "name": "topElement_with_children",
+                "status": "OK"
+            },
             "subElement": [
             ]
         }
