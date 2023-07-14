@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.approvaltests:approvaltests-util:18.7.1" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="com.approvaltests" artifactId="approvaltests-util" version="18.7.1" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.approvaltests/approvaltests-util/18.7.1/92bcccf966555f471f8c3241b387eabd89782282/approvaltests-util-18.7.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.approvaltests/approvaltests-util/18.7.1/784e087a10b05e5e4cf51291e8c7eaa5b9d4eba9/approvaltests-util-18.7.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

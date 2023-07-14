@@ -1,0 +1,28 @@
+plugins {
+    id 'java'
+    id('io.freefair.lombok') version '8.1.0'
+}
+
+group = 'de.drunkenmasters.learning'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+//    compileOnly 'org.projectlombok:lombok:1.18.28'
+//    annotationProcessor 'org.projectlombok:lombok:1.18.28'
+
+    implementation 'javax.json.bind:javax.json.bind-api:1.0'
+    implementation 'org.eclipse:yasson:1.0'
+    implementation 'org.glassfish:javax.json:1.1'
+
+    testImplementation platform('org.junit:junit-bom:5.9.1')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testImplementation 'com.approvaltests:approvaltests:18.7.1'
+}
+
+test {
+    useJUnitPlatform()
+}
