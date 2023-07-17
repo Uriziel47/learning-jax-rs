@@ -3,9 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/learning-jax-rs.iml" filepath="$PROJECT_DIR$/learning-jax-rs.iml" />
-      <module fileurl="file://$PROJECT_DIR$/learning-jax-rs.jsonb.iml" filepath="$PROJECT_DIR$/learning-jax-rs.jsonb.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/learning-jax-rs.jsonb.main.iml" filepath="$PROJECT_DIR$/.idea/modules/learning-jax-rs.jsonb.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/learning-jax-rs.jsonb.test.iml" filepath="$PROJECT_DIR$/.idea/modules/learning-jax-rs.jsonb.test.iml" />
     </modules>
   </component>
 </project>
