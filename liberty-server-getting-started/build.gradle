@@ -19,12 +19,37 @@ repositories {
 dependencies {
     providedCompile 'jakarta.platform:jakarta.jakartaee-api:10.0.0'
     providedCompile 'org.eclipse.microprofile:microprofile:6.0'
+
     testImplementation platform('org.junit:junit-bom:5.9.1')
     testImplementation 'org.junit.jupiter:junit-jupiter'
 }
 
-test {
-    useJUnitPlatform()
+ext  {
+    liberty.server.var.'default.http.port' = '9080'
+    liberty.server.var.'default.https.port' = '9443'
+    liberty.server.var.'app.context.root' = project.name
 }
 
+task openBrowser {
+    description = 'Open browser to the running application'
+    doLast {
+        String port = liberty.server.var.'default.http.port'
+        String context = liberty.server.var.'app.context.root'
+        String URL = "http://localhost:" + port + "/" + context + "/" + "servlet"
+        java.awt.Desktop.desktop.browse URL.toURI()
+        java.awt.Desktop.desktop.browse file("$buildDir/reports/tests/test/index.html").toURI()
+    }
+}
+
+test {
+    useJUnitPlatform()
+    testLogging {
+        events 'passed', 'skipped', 'failed', 'standardOut'
+        exceptionFormat 'full'
+    }
+    systemProperty 'http.port', liberty.server.var.'default.http.port'
+    systemProperty 'context.root',  liberty.server.var.'app.context.root'
+}
+
+test.dependsOn 'libertyStart'
 clean.dependsOn 'libertyStop'

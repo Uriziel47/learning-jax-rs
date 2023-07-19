@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <server description="new server">
 
-    <!-- Enable features -->
     <featureManager>
-        <feature>jakartaee-10.0</feature>
-        <feature>microProfile-6.0</feature>
+        <feature>restfulWS-3.1</feature>
+        <feature>jsonb-3.0</feature>
+        <feature>mpOpenAPI-3.1</feature>
     </featureManager>
+
 
     <!-- This template enables security. To get the full use of all the capabilities, a keystore and user registry are required. -->
 
@@ -26,10 +27,16 @@
 
     </basicRegistry>
 
-    <!-- To access this server from a remote client add a host attribute to the following element, e.g. host="*" -->
+    <administrator-role>
+        <user>admin</user>
+    </administrator-role>
+
+    <variable name="default.http.port" defaultValue="9080" />
+    <variable name="default.https.port" defaultValue="9443" />
+
     <httpEndpoint id="defaultHttpEndpoint"
-                  httpPort="9080"
-                  httpsPort="9443" />
+                  httpPort="${default.http.port}"
+                  httpsPort="${default.https.port}" />
 
     <!-- Automatically expand WAR files and EAR files -->
     <applicationManager autoExpand="true"/>
